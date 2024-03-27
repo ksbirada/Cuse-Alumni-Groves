@@ -14,7 +14,7 @@
 }
 
 .inputstyle {
-    border: 1px solid #000D51 ;
+    border: 1px solid #000D51;
 }
 
 h1 {
@@ -22,9 +22,9 @@ h1 {
 }
 
 button {
-    background-color: white;
-    color: #F7401A;
-    border: 2px solid #F7401A;
+    background-color: white !important;
+    color: #F7401A !important;
+    border: 2px solid #F7401A !important;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
@@ -33,8 +33,8 @@ button {
 
 /* Optional: Add hover effect */
 button:hover {
-    background-color: #F7401A;
-    color: white;
+    background-color: #F7401A !important;
+    color: white !important;
 }
 
 .inlinetext{

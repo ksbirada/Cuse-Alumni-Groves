@@ -2,6 +2,7 @@ import React from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -25,6 +26,7 @@ function SignUp() {
       'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.'),
     firstName: yup.string().required(),
     lastName: yup.string().required(),
+    userType: yup.string().required()
   });
 
   return (
@@ -37,6 +39,7 @@ function SignUp() {
           password: "",
           firstName: "",
           lastName: "",
+          userType: ""
         }}
         onSubmit={(values) => {
           console.log(values)
@@ -87,6 +90,21 @@ function SignUp() {
                 />
                 <Form.Control.Feedback type="invalid">
                 {errors.lastName}
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
+            <Row className="mb-3">
+              <Form.Group as={Col} md="12" controlId="signInUserType">
+                <Form.Label>User Type</Form.Label>
+                <DropdownButton
+                            id="dropdown-basic-button"
+                            title={values.userType ? values.userType : 'Select Role'}
+                        >
+                            <Dropdown.Item onClick={() => handleChange({ target: { name: 'userType', value: 'Student' } })}>Student</Dropdown.Item>
+                            <Dropdown.Item onClick={() => handleChange({ target: { name: 'userType', value: 'Alumni' } })}>Alumni</Dropdown.Item>
+                </DropdownButton>
+                <Form.Control.Feedback type="invalid">
+                {errors.userType}
                 </Form.Control.Feedback>
               </Form.Group>
             </Row>
