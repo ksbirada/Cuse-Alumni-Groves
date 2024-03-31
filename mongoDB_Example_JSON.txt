@@ -1,0 +1,50 @@
+{
+    "user_id": "789",
+    "name": "Alice Johnson",
+    "email": "alice@example.com",
+    "password": "newhashedpassword",
+    "profile_image":"<binary>",
+    "posts": [
+        {
+            "post_id": "1013",
+            "text": "New post!",
+            "date": "2024-03-31",
+            "image":"<binary>",
+            "comments": [
+                {
+                    "comment_id": "1012",
+                    "user_id": "123",
+                    "text": "Great post!",
+                    "date": "2024-03-31"
+                }
+            ],
+            "likes": [
+                {
+                    "like_id": "1013",
+                    "user_id": "123",
+                    "date": "2024-03-31"
+                }
+            ]
+        }
+    ],
+    "followers": [
+        {
+            "user_id": "123",
+            "name": "Jane Doe"
+        },
+        {
+            "user_id": "456",
+            "name": "John Smith"
+        }
+    ],
+    "following": [
+        {
+            "user_id": "123",
+            "name": "Jane Doe"
+        },
+        {
+            "user_id": "456",
+            "name": "John Smith"
+        }
+    ]
+}
