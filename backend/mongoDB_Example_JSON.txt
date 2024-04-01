@@ -3,6 +3,7 @@
     "name": "Alice Johnson",
     "email": "alice@example.com",
     "password": "newhashedpassword",
+    "type":"student/alumni",
     "profile_image":"<binary>",
     "posts": [
         {
