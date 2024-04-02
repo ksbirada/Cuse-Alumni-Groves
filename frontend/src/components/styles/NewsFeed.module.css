@@ -1,0 +1,12 @@
+/* FeedPage.module.css */
+
+.feedPage {
+    padding: 20px;
+  }
+  
+  .actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
