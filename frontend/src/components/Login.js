@@ -102,7 +102,7 @@ function Login() {
               <h1 className="text-success">Sign Up</h1>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} md="12" controlId="loginFirstName"> // Changed controlId from signInFirstName to loginFirstName
+              <Form.Group as={Col} md="12" controlId="loginFirstName">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
                   type="text"
