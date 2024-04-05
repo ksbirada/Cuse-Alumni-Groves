@@ -10,3 +10,20 @@
     justify-content: space-between;
   }
   
+  .signOutButton:hover {
+    cursor: pointer;
+}
+
+.navbarContainer {
+    padding: 0 !important;
+}
+
+.navContainer {
+    display: flex !important; 
+    flex-direction: column !important;
+    width: 100%;
+}
+
+.textcolor{
+  color: #F7401A !important;
+}
