@@ -50,13 +50,17 @@ function NewsFeed() {
           </Row>
         </Col>
         <Col md={6}>
-          <div className="d-flex justify-content-center align-items-center w-100 h-100">
-            <Button variant="success" >
-              Find All User Accounts
-            </Button>
-            {/* </Button> Replace with search bar */}
-          </div>
-        </Col>
+         <div className="d-flex justify-content-center align-items-center w-100 h-100">
+         <form className="w-100">
+          <input 
+           type="search" 
+          className="form-control" 
+           placeholder="Search user accounts..." 
+      />
+    </form>
+  </div>
+</Col>
+
       </Row>
       <Row>
         <Col md={4}>
