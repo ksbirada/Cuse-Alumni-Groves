@@ -7,10 +7,42 @@
 }
 
 .formContainer {
-    width: 30%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.inputstyle {
+    border: 1px solid #000D51;
+}
+
+h1 {
+    color: #F7401A !important;
+}
+
+h3 {
+    color: #F7401A !important;
+}
+
+button {
+    background-color: white !important;
+    color: #F7401A !important;
+    border: 2px solid #F7401A !important;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Optional: Add hover effect */
+button:hover {
+    background-color: #F7401A !important;
+    color: white !important;
+}
+
+.inlinetext{
+    color: #000D51;
 }
 
 @media only screen and (max-width: 575px) {

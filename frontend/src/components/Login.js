@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { RiLoginBoxLine } from "react-icons/ri";
 
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -30,6 +32,7 @@ function Login() {
   });
 
   async function postSignUpInfo(formData) {
+    navigate("/newsfeed");
     const response = await axios({
       method: "post",
       url: "/api/v1/users/save",
@@ -51,7 +54,7 @@ function Login() {
     }
 
     if (response.data!== null && response.data.status === "success") {
-      navigate("/signin");
+      navigate("/newsfeed");
     }
   }
 
@@ -98,38 +101,8 @@ function Login() {
             onSubmit={handleSubmit}
             className={styles.formContainer} 
           >
-            <Row className="mb-5 text-center">
-              <h1 className="text-success">Sign Up</h1>
-            </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} md="12" controlId="loginFirstName">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="firstName"
-                  value={values.firstName}
-                  onChange={handleChange}
-                  isInvalid={touched.firstName && errors.firstName}
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please enter your first name
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} md="12" controlId="loginLastName"> 
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="lastName"
-                  value={values.lastName}
-                  onChange={handleChange}
-                  isInvalid={touched.lastName && errors.lastName}
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please enter your last name
-                </Form.Control.Feedback>
-              </Form.Group>
+            <Row className="mb-2 text-center">
+              <h1 className="heading">Welcome to <span className={styles.inlinetext}>Cuse Alumni Groves</span></h1>
             </Row>
             <Row className="mb-3">
               <Form.Group as={Col} md="12" controlId="loginEmail"> 
@@ -163,8 +136,14 @@ function Login() {
               </Form.Group>
             </Row>
             <Button type="submit" variant="success">
-              Sign Up <BsFillPersonPlusFill />
+              Sign In <RiLoginBoxLine />
             </Button>
+            <Row className="mt-3">
+              <Col className="text-center">
+              <span>Don't have an account?</span>{" "}
+                <Link to="/signup">Sign Up</Link>
+              </Col>
+            </Row> 
           </Form>
         )}
       </Formik>
@@ -173,3 +152,4 @@ function Login() {
 }
 
 export default Login;
+
