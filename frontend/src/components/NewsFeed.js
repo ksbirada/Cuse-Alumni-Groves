@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link, Outlet } from "react-router-dom";
 import { Button, Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 import logo from "./assets/ca.jpeg";
 
@@ -39,21 +39,22 @@ function NewsFeed() {
   return (
     <Container className="pt-3">
       <Row className="mb-3">
-        <Col md={4}>
+        <Col md={6}>
           <Row className="justify-content-center align-items-center">
             <Col md="auto" className="text-sm-start text-center mb-sm-0 mb-3">
               <img src={logo} width="125" alt="logo" />
             </Col>
-            <Col className="text-sm-start text-center text-success mb-sm-0 mb-3">
-              <h1>Penguin Social Network</h1>
+            <Col className="text-sm-start text-center mb-sm-0 mb-3">
+              <h3>Cuse Alumni Groves</h3>
             </Col>
           </Row>
         </Col>
-        <Col md={8}>
+        <Col md={6}>
           <div className="d-flex justify-content-center align-items-center w-100 h-100">
             <Button variant="success" >
               Find All User Accounts
             </Button>
+            {/* </Button> Replace with search bar */}
           </div>
         </Col>
       </Row>
@@ -67,7 +68,7 @@ function NewsFeed() {
                 <ul className="list-group">
                 <Nav.Link>
                   <Link to="" className="text-decoration-none">
-                    <li className="list-group-item fs-5 py-3 text-success shadow">
+                  <li className={`list-group-item fs-5 py-3 shadow ${styles.textcolor}`}>
                       <span>
                         {" "}
                         <RiNewspaperLine /> Newsfeed
@@ -76,26 +77,8 @@ function NewsFeed() {
                   </Link>
                 </Nav.Link>
                 <Nav.Link>
-                  <Link to="following" className="text-decoration-none">
-                    <li className="list-group-item fs-5 py-3 text-success shadow">
-                      <span>
-                        <RiRadarLine /> Following
-                      </span>
-                    </li>
-                  </Link>
-                </Nav.Link>
-                <Nav.Link>
-                  <Link to="follower" className="text-decoration-none">
-                    <li className="list-group-item fs-5 py-3 text-success shadow">
-                      <span>
-                        <RiBaseStationLine /> Followers
-                      </span>
-                    </li>
-                  </Link>
-                </Nav.Link>
-                <Nav.Link>
                   <Link to="myprofile" className="text-decoration-none">
-                    <li className="list-group-item fs-5 py-3 text-success shadow">
+                  <li className={`list-group-item fs-5 py-3 shadow ${styles.textcolor}`}>
                       <span>
                         <RiFolderUserLine /> My Posts
                       </span>
@@ -103,10 +86,7 @@ function NewsFeed() {
                   </Link>
                 </Nav.Link>
                 <Nav.Link>
-                  <li
-                    className={`list-group-item fs-5 py-3 text-success shadow ${styles.signOutButton}`}
-                    
-                  >
+                  <li className={`list-group-item fs-5 py-3 shadow ${styles.signOutButton} ${styles.textcolor}`}>
                     <span>
                       <RiLogoutBoxLine /> Sign Out
                     </span>
