@@ -4,6 +4,7 @@ import com.alumni.groves.backend.models.ResponseObject;
 import com.alumni.groves.backend.models.UserModel;
 import com.alumni.groves.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,6 +16,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepo;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public ResponseObject saveUser(UserModel inputUser) {
         ResponseObject responseObj = new ResponseObject();
@@ -25,7 +29,7 @@ public class UserService {
             responseObj.setPayload(null);
             return responseObj;
         } else {
-            inputUser.setPassword(inputUser.getPassword());
+            inputUser.setPassword(passwordEncoder.encode(inputUser.getPassword()));
 
             // user follows himself so he could get his posts in newsfeed as well
             UserModel user = userRepo.save(inputUser);
