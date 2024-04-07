@@ -16,7 +16,7 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepo;
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -25,7 +25,7 @@ public class UserService {
         Optional<UserModel> optUser = userRepo.findByEmail(inputUser.getEmail());
         if (optUser.isPresent()) {
             responseObj.setStatus("fail");
-            responseObj.setMessage("Email address " + inputUser.getEmail() + " existed");
+            responseObj.setMessage("Email address " + inputUser.getEmail() + "already exists");
             responseObj.setPayload(null);
             return responseObj;
         } else {

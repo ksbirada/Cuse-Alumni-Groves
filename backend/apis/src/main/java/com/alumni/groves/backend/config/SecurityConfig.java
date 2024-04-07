@@ -3,7 +3,6 @@ package com.alumni.groves.backend.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
-import org.springframework.stereotype.Component;
 
 @Configuration
 public class SecurityConfig {
