@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
+import axios from "axios";
 
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import Form from "react-bootstrap/Form";
@@ -11,10 +12,15 @@ import { BsFillPersonPlusFill } from "react-icons/bs";
 
 import styles from "./styles/signup.module.css";
 import Container from "react-bootstrap/esm/Container";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
+
+  const [resData, setResData] = useState(null);
+  
+  let navigate = useNavigate();
 
   const schema = yup.object().shape({
     email: yup.string().email().matches(/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/, 'Invalid email format').required(),
@@ -29,6 +35,46 @@ function SignUp() {
     userType: yup.string().required()
   });
 
+  async function postSignUpInfo(inputData) {
+    const response = await axios({
+      method: "post",
+      url: "http://localhost:8080/api/v1/users/save",
+      data: {
+        firstName: inputData.firstName,
+        lastName: inputData.lastName,
+        email: inputData.email,
+        password: inputData.password,
+        userType: inputData.userType,
+      },
+    });
+
+    if (response.data !== null) {
+      setResData(response.data);
+    }
+    
+    if (response.data !== null && response.data.status === "fail") {
+      showWarningToast(response.data.message);      
+    }
+
+    if (response.data!== null && response.data.status === "success") {
+      navigate("/login");
+    }
+
+  }
+
+  function showWarningToast(inputMessage) {
+    toast.warn(inputMessage, {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  }
+
   return (
     <Container fluid className={styles.container}>
       <ToastContainer />
@@ -41,8 +87,10 @@ function SignUp() {
           lastName: "",
           userType: ""
         }}
-        onSubmit={(values) => {
+        onSubmit={(values, { setSubmitting }) => {
           console.log(values)
+          postSignUpInfo(values);
+          setSubmitting(false);
         }}
       >
         {({

@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "83c7a75d-4c13-45b7-af1a-57a3cf2ee97b",
+		"name": "Cuse Alumni Groves",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13759710"
+	},
+	"item": [
+		{
+			"name": "Sign Up",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":\"123\",\n    \"firstName\": \"Kamaljit\",\n    \"lastName\": \"Aulakh\",\n    \"email\": \"kkaulakh@syr.edu\",\n    \"password\": \"abc\",\n    \"userType\": \"student\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"save"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
