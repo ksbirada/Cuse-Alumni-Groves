@@ -1,0 +1,30 @@
+{
+  "_id": {
+    "$oid": "661468b422a58b6fe093498f"
+  },
+  "userId": "1234567890abcdef12345678",
+  "originalUserId": "abcdef1234567890abcdef12",
+  "content": "This is an example post content.",
+  "image": "http://example.com/image.jpg",
+  "createdAt": "2022-04-13T12:30:24.00Z",
+  "comment": [
+    {
+      "id": "78901234abcdef1234567890",
+      "userId": "89012345abcdef1234567890",
+      "userFullname": "Jane Doe",
+      "content": "Nice post!",
+      "createdAt": "2022-04-14T08:15:30.00Z"
+    },
+    {
+      "id": "89012345abcdef1234567891",
+      "userId": "90123456abcdef1234567890",
+      "userFullname": "John Smith",
+      "content": "Great picture!",
+      "createdAt": "2022-04-14T09:20:15.00Z"
+    }
+  ],
+  "like": [
+    "234567890abcdef123456789",
+    "34567890abcdef1234567890"
+  ]
+}
