@@ -1,0 +1,10 @@
+{
+  "_id": {
+    "$oid": "6614658522a58b6fe093498a"
+  },
+  "firstName": "Kamaljit",
+  "lastName": "Aulakh",
+  "email": "kkaulakh@syr.edu",
+  "password": "{6KnFNB6J93tXIF/2M+wvC6aFmlsAPJ93vf21G4A3lCs=}b12c929b501fe0baf7160e0f110da8cca35eb83ffe54bdbebc7f8bbdac75e2a7",
+  "userType": "Student"
+}
