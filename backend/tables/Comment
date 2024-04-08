@@ -1,0 +1,9 @@
+{
+  "_id": {
+    "$oid": "6614682b22a58b6fe093498c"
+  },
+  "userId": "6614658522a58b6fe093498a",
+  "userFullname": "Kamaljit Aulakh",
+  "content": "This is an example comment.",
+  "createdAt": "2022-04-12T23:20:50.52Z"
+}
