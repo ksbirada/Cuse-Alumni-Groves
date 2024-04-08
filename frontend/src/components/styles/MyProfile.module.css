@@ -1,0 +1,42 @@
+.profileSection {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.postItem {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.profileSection h2,
+.postItem h3 {
+  color: #333;
+}
+
+.profileSection p,
+.postItem p {
+  color: #666;
+}
+
+.profileSection button {
+  margin-top: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profileSection button:hover {
+  background-color: #0056b3;
+}
