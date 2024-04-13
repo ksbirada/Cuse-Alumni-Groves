@@ -1,29 +1,104 @@
 /* FeedPage.module.css */
 
 .feedPage {
-    padding: 20px;
-  }
-  
-  .actions {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .signOutButton:hover {
-    cursor: pointer;
+  padding: 20px;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.signOutButton:hover {
+  cursor: pointer;
 }
 
 .navbarContainer {
-    padding: 0 !important;
+  padding: 0px !important;
 }
 
 .navContainer {
-    display: flex !important; 
-    flex-direction: column !important;
-    width: 100%;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100%;
 }
-
-.textcolor{
+.textcolor {
   color: #F7401A !important;
 }
+
+/*  styles for search bar */
+.searchBar {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchBar input[type="search"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+/* Styles for post content form */
+.postContentForm {
+  background-color: #f9f9f9;
+  padding-top: 20px;
+  padding-right: 45px;  
+  padding-bottom: 60px;
+  padding-left: 45px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.postContentForm textarea,
+.postContentForm input[type="file"] {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.postContentForm textarea {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  height: 100px; /* Fixed height for textarea */
+  resize: none; /* Disable resizing */
+}
+
+.postContentForm input[type="file"] {
+  border: none;
+}
+
+.postContentForm button {
+  float: right;
+  background-color: #F7401A;
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.postContentForm button:hover {
+  background-color: #dd3310;
+  cursor: pointer;
+}
+
+/* Styles for displaying posts */
+.postItem {
+  background-color: #ffffff;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.postItem img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
