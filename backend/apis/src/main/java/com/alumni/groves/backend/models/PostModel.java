@@ -1,5 +1,7 @@
 package com.alumni.groves.backend.models;
 
+import java.time.Instant;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,18 +11,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "Users")
-public class UserModel {
+@Document(collection = "Posts")
+public class PostModel {
     @Id
     private String id;
 
-    private String firstName;
+    private String userId;
 
-    private String lastName;
+    private String title;
 
-    private String email;
+    private String content;
 
-    private String password;
+    private String image1;
 
-    private String userType;
+    private String image2;
+
+    private Instant createdAt;
 }
