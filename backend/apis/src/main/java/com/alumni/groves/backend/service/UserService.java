@@ -4,15 +4,23 @@ import com.alumni.groves.backend.models.ResponseObject;
 import com.alumni.groves.backend.models.UserModel;
 import com.alumni.groves.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService{
 
     @Autowired
     private UserRepository userRepo;
@@ -55,6 +63,22 @@ public class UserService {
             }
         }
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<UserModel> optUser = userRepo.findByEmail(email);
+        User springUser = null;
+
+        if (optUser.isEmpty()) {
+            throw new UsernameNotFoundException("Cannot find user with email: " + email);
+        } else {
+            UserModel foundUser = optUser.get();
+            Set<GrantedAuthority> ga = new HashSet<>();
+            springUser = new User(foundUser.getEmail(), foundUser.getPassword(), ga);
+            return springUser;
+        }
+    }
+
 }
 
 
