@@ -86,11 +86,21 @@ function PostItem(props) {
           </div>
           <div className="mx-3">
             <div>
+              <p>{props.title}</p>
+            </div>
+            <div>
               <p>{props.content}</p>
             </div>
-            {props.image !== null ? (
+            {props.image1 !== null ? (
               <div className="d-flex justify-content-center align-items-center mb-3">
-                <img src={props.image} alt="" />
+                <img src={props.image1} alt="" />
+              </div>
+            ) : (
+              <span></span>
+            )}
+            {props.image2 !== null ? (
+              <div className="d-flex justify-content-center align-items-center mb-3">
+                <img src={props.image2} alt="" />
               </div>
             ) : (
               <span></span>
@@ -113,7 +123,7 @@ function PostItem(props) {
                 )}
               </span>
               <span>
-                {props.loveList.length > 0 ? props.loveList.length : null}
+                {props.loveList > 0 ? props.loveList : null}
               </span>
             </div>
   
@@ -161,10 +171,10 @@ function PostItem(props) {
                 <div className="border rounded border-info my-3 px-2 pb-2">
                   <div className="d-flex align-items-center my-2">
                     <div className="w-100 mx-1 fw-bold">
-                      <span>{commentItem.userFullname}</span>
+                      <span>{commentItem.username}</span>
                     </div>
                   </div>
-                  <div>{commentItem.content}</div>
+                  <div>{commentItem.comment}</div>
                 </div>
               ))}
             </div>

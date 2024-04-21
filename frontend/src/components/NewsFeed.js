@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Col, Container, Nav, Navbar, Row, Form, Alert } from 'react-bootstrap';
 import logo from './assets/ca.jpeg';
@@ -13,11 +13,41 @@ import {
 import styles from './styles/NewsFeed.module.css';
 
 function NewsFeed() {
+
+  // const [postId, setPostId] = useState('');
+  // const [userId, setUserId] = useState('');
+  // const [firstName, setFirstName] = useState('');
+  // const [lastName, setLastName] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [images, setImages] = useState([]);
-  const [posts, setPosts] = useState([]);
-  const [error, setError] = useState('');
+  // const [image1, setImage1] = useState('');
+  // const [image2, setImage2] = useState('');
+  // const [likeCount, setLikeCount] = useState('');
+  // const [comments, setComments] = useState([]);
+  // const [createdAt, setCreatedAt] = useState('');
+  const[responsePost, setResponsePost] = useState([]);
+  const[error, setError] = useState('');
+  const[images, setImages] = useState([]);
+  const[posts, setPosts] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/v1/getpost');
+        const data = await response.json();
+        if (data.status === 'success') {
+          setResponsePost(data.payload);
+        } else {
+          console.error('Error fetching posts:', data.message);
+        }
+        console.log(data);
+      } catch (error) {
+        console.error('Error fetching post data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -169,18 +199,27 @@ function NewsFeed() {
         <Row className='mt-5 mb-5'>
           <Col md={4}></Col>
           <Col md={8}>
-            <PostItem
-              key={123}
-              postId={1}
-              userId={22}
-              firstName={"Kamaljit"}
-              lastName={"Aulakh"}
-              content={"This is my content"}
-              image={"ABC"}
-              loveList={[1,2,3]}
-              shareList={[1,2,3]}
-              commentList={[1,2,3]}
-              postDate={"12:31:76"}/>
+
+          {responsePost.length > 0 ? (
+              responsePost.map((post, index) => (
+                <PostItem
+                  key={post.id}
+                  postId={post.id}
+                  userId={post.userId}
+                  firstName={post.firstName || ''}
+                  lastName={post.lastName || ''}
+                  title={post.title}
+                  content={post.content}
+                  image1={post.image1}
+                  image2={post.image2}
+                  likeCount={post.likeCount}
+                  commentList={post.comment || []}
+                  createdAt={post.createdAt}
+                />
+              ))
+          ) : (
+            <div>No posts found.</div>
+          )}
           </Col>
         </Row>
       </Container>
