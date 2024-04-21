@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Col, Container, Nav, Navbar, Row, Form, Alert } from 'react-bootstrap';
 import logo from './assets/ca.jpeg';
+import PostItem from "./PostItem";
 
 import {
   RiNewspaperLine,
@@ -65,7 +66,8 @@ function NewsFeed() {
   };
 
   return (
-    <Container className="pt-3">
+    <>
+      <Container className="pt-3">
       <Row className="mb-3">
         <Col md={6}>
           <Row className="justify-content-center align-items-center">
@@ -162,7 +164,29 @@ function NewsFeed() {
           ))}
         </Col>
       </Row>
-    </Container>
+      </Container>
+      <Container>
+        <Row className='mt-5 mb-5'>
+          <Col md={4}></Col>
+          <Col md={8}>
+            <PostItem
+              key={123}
+              postId={1}
+              userId={22}
+              firstName={"Kamaljit"}
+              lastName={"Aulakh"}
+              content={"This is my content"}
+              image={"ABC"}
+              loveList={[1,2,3]}
+              shareList={[1,2,3]}
+              commentList={[1,2,3]}
+              postDate={"12:31:76"}/>
+          </Col>
+        </Row>
+      </Container>
+      
+    </>
+    
   );
 }
 
