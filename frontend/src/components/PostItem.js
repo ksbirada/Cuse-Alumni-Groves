@@ -129,19 +129,6 @@ function PostItem(props) {
                 {props.commentList.length > 0 ? props.commentList.length : null}
               </span>
             </div>
-  
-            {/* Sub-function share button */}
-            <div className="mx-3">
-              <span
-                className={`mx-1 fs-4`}
-                onClick={handleShareClick}
-              >
-                <RiShareForwardFill className="text-success" />
-              </span>
-              <span>
-                {props.shareList.length > 0 ? props.shareList.length : null}
-              </span>
-            </div>
           </div>
   
           {/* List of comments and comment input box */}
