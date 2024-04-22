@@ -24,8 +24,8 @@ public class UserControllers {
     @Autowired
     private UserService userService;
 
-    //@Autowired
-    //private AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private UserRepository userRepo;
