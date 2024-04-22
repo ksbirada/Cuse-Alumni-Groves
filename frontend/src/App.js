@@ -4,6 +4,8 @@ import Signup from './components/signup'
 import NewsFeed from './components/NewsFeed';
 import Login from './components/Login';
 import MyProfile from './components/MyProfile';
+import EditProfile from './components/EditProfile';
+
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/newsfeed" element={<NewsFeed />} />
           <Route path="/MyProfile" element={<MyProfile />} />
+          <Route path="/EditProfile" element={<EditProfile />} />
       </Routes>
     </BrowserRouter>
   );
