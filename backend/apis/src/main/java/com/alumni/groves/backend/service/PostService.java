@@ -32,4 +32,12 @@ public class PostService {
         responseObj.setPayload(repo.findAll(Sort.by(Sort.Direction.DESC, "createdAt")));
         return responseObj;
     }
+
+    public ResponseObject getAllPosts(String email){
+        ResponseObject responseObj = new ResponseObject();
+        responseObj.setStatus("success");
+        responseObj.setMessage("success");
+        responseObj.setPayload(repo.findAllByUserId(email));
+        return responseObj;
+    }
 }
