@@ -69,8 +69,8 @@ function MyProfile() {
               key={post.id}
               postId={post.id}
               userId={post.userId}
-              firstName={post.firstName || ''}
-              lastName={post.lastName || ''}
+              firstName={''}
+              lastName={''}
               title={post.title}
               content={post.content}
               image1={post.image1}
