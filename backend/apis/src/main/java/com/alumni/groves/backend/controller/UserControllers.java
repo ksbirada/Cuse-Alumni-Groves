@@ -25,8 +25,7 @@ public class UserControllers {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+//    /
 
     @Autowired
     private UserRepository userRepo;
@@ -40,7 +39,7 @@ public class UserControllers {
         @PostMapping("/users/signin")
     public ResponseEntity<ResponseObject> userSignIn(@RequestBody UserSignInModel inputUser) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(inputUser.getEmail(), inputUser.getPassword()));
+            //authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(inputUser.getEmail(), inputUser.getPassword()));
             String token = "token";
             
             Optional<UserModel> optUser = userRepo.findByEmail(inputUser.getEmail());

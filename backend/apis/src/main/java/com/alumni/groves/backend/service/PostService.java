@@ -29,7 +29,7 @@ public class PostService {
         ResponseObject responseObj = new ResponseObject();
         responseObj.setStatus("success");
         responseObj.setMessage("success");
-        responseObj.setPayload(repo.findAll(Sort.by("createdAt")));
+        responseObj.setPayload(repo.findAll(Sort.by(Sort.Direction.DESC, "createdAt")));
         return responseObj;
     }
 }

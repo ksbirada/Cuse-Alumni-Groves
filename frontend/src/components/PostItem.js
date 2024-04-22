@@ -28,13 +28,7 @@ function PostItem(props) {
     const timeAgo = new TimeAgo("en-US");
   
     function handleLoveClick(e) {
-      if (!props.loveList.includes(currentUserId)) {
-        setLoveStatus(true);
-        //dispatch(addLove({ postId: postId, userId: currentUserId }));
-      } else {
-        setLoveStatus(false);
-        //dispatch(addLove({ postId: postId, userId: currentUserId }));
-      }
+      console.log("Do nothing for now");
     }
   
     function handleShareClick(e) {
