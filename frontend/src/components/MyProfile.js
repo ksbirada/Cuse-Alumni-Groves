@@ -1,26 +1,54 @@
 // MyProfile.js
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import styles from "./styles/MyProfile.module.css";
+import PostItem from "./PostItem";
 
 function MyProfile() {
   const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState({})
+  const [postData, setPostData] = useState([])
 
-  // Static user info and posts data for display
-  const userInfo = {
-    firstName: "John",
-    lastName: "Doe",
-    email: "johndoe@example.com",
-    role: "Alumni",
-    joiningYear: "2017"
-  };
+  useEffect(() => {
+    
+    const userId = "kkaulakh@syr.edu";
 
-  const posts = [
-    { id: 1, title: "First Post", content: "This is the first post content." },
-    { id: 2, title: "Second Post", content: "This is the second post content." }
-  ];
+    // Fetch user data and posts from the database based on userId
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/v1/get/${userId}`);
+        const data = await response.json();
+
+        if (response.ok) {
+          setUserInfo(data.payload);
+        } else {
+          console.error("Error fetching user data:", data.error);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    const fetchPostOfUser = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/v1/getpost/${userId}`);
+        const data = await response.json();
+
+        if (response.ok) {
+          setPostData(data.payload);
+        } else {
+          console.error("Error fetching post data:", data.error);
+        }
+      } catch (error) {
+        console.error("Error fetching post data:", error);
+      }
+    };
+
+    fetchUserData();
+    fetchPostOfUser();
+  }, []);
 
   return (
     <Container className="pt-3">
@@ -30,18 +58,27 @@ function MyProfile() {
             <h2>Profile Information</h2>
             <p><strong>Name:</strong> {userInfo.firstName} {userInfo.lastName}</p>
             <p><strong>Email:</strong> {userInfo.email}</p>
-            <p><strong>Role:</strong> {userInfo.role}</p>
-            <p><strong>Joining Year:</strong> {userInfo.joiningYear}</p>
+            <p><strong>Role:</strong> {userInfo.userType}</p>
             <Button variant="primary" onClick={() => navigate("/editprofile")}>Edit Profile</Button>
           </div>
         </Col>
         <Col md={8}>
           <h2>My Posts</h2>
-          {posts.map((post) => (
-            <div key={post.id} className={styles.postItem}>
-              <h3>{post.title}</h3>
-              <p>{post.content}</p>
-            </div>
+          {postData.map((post, index) => (
+            <PostItem
+              key={post.id}
+              postId={post.id}
+              userId={post.userId}
+              firstName={post.firstName || ''}
+              lastName={post.lastName || ''}
+              title={post.title}
+              content={post.content}
+              image1={post.image1}
+              image2={post.image2}
+              likeCount={post.likeCount}
+              commentList={post.comment || []}
+              createdAt={post.createdAt}
+            />
           ))}
         </Col>
       </Row>
