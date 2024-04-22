@@ -5,7 +5,6 @@ import com.alumni.groves.backend.models.UserModel;
 import com.alumni.groves.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -79,6 +78,46 @@ public class UserService implements UserDetailsService{
         }
     }
 
+
+    public ResponseObject updateDetails(String currentUsername, String newUsername) {
+        ResponseObject responseObj = new ResponseObject();
+        Optional<UserModel> optUser = userRepo.findByEmail(currentUsername);
+
+        if (optUser.isEmpty()) {
+            responseObj.setStatus("fail");
+            responseObj.setMessage("User with email " + currentUsername + " not found");
+            return responseObj;
+        }
+
+        UserModel user = optUser.get();
+        user.setEmail(newUsername);
+        userRepo.save(user);
+
+        responseObj.setStatus("success");
+        responseObj.setMessage("Username updated successfully");
+        responseObj.setPayload(user);
+        return responseObj;
+    }
+
+    public ResponseObject updateDetails(String currentUsername, PasswordEncoder password) {
+        ResponseObject responseObj = new ResponseObject();
+        Optional<UserModel> optUser = userRepo.findByEmail(currentUsername);
+
+        if (optUser.isEmpty()) {
+            responseObj.setStatus("fail");
+            responseObj.setMessage("User with email " + currentUsername + " not found");
+            return responseObj;
+        }
+
+        UserModel user = optUser.get();
+        user.setPassword(password.toString());
+        userRepo.save(user);
+
+        responseObj.setStatus("success");
+        responseObj.setMessage("Password updated successfully");
+        responseObj.setPayload(user);
+        return responseObj;
+    }
 }
 
 
