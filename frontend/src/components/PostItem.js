@@ -19,9 +19,6 @@ function PostItem(props) {
     const [commentStatus, setCommentStatus] = useState(false);
     const [commentContent, setCommentContent] = useState("");
     const [sendButtonDisable, setSendButtonDisable] = useState(true);
-    const [currentUserId, setCurrentUserId] = useState(
-      localStorage.getItem("psnUserId")
-    );
     const [postId, setPostId] = useState(props.postId);
   
     TimeAgo.addLocale(en);

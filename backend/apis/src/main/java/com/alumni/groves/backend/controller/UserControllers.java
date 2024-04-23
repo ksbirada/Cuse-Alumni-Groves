@@ -6,11 +6,17 @@ import com.alumni.groves.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.*;
+
 
 import java.util.Optional;
 
@@ -33,13 +39,18 @@ public class UserControllers {
 
     @PostMapping("/users/save")
     public ResponseEntity<ResponseObject> saveUser(@RequestBody UserModel inputUser) {
-        return new ResponseEntity<ResponseObject>(userService.saveUser(inputUser), HttpStatus.OK);
+        return new ResponseEntity<>(userService.saveUser(inputUser), HttpStatus.OK);
+    }
+
+    @GetMapping("/get/{userId}")
+    public ResponseEntity<ResponseObject> getUserDetailsById(@PathVariable String userId) {
+        return new ResponseEntity<>(userService.findById(userId), HttpStatus.OK);
     }
 
     @PostMapping("/users/signin")
     public ResponseEntity<ResponseObject> userSignIn(@RequestBody UserSignInModel inputUser) {
         try {
-            //authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(inputUser.getEmail(), inputUser.getPassword()));
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(inputUser.getEmail(), inputUser.getPassword()));
             String token = "token";
 
             Optional<UserModel> optUser = userRepo.findByEmail(inputUser.getEmail());

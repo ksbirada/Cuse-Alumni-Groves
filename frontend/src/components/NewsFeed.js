@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Col, Container, Nav, Navbar, Row, Form, Alert } from 'react-bootstrap';
 import logo from './assets/ca.jpeg';
 import PostItem from "./PostItem";
@@ -13,6 +13,8 @@ import {
 import styles from './styles/NewsFeed.module.css';
 
 function NewsFeed() {
+
+  const navigate = useNavigate();
 
   // const [postId, setPostId] = useState('');
   // const [userId, setUserId] = useState('');
@@ -52,6 +54,15 @@ function NewsFeed() {
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
+
+  function handleSignOut(e) {
+    e.preventDefault();
+    console.log(localStorage);
+    localStorage.removeItem("userId");
+    localStorage.removeItem("firstName");
+    localStorage.removeItem("lastName");
+    navigate("/login");
+  }
 
   const handleContentChange = (event) => {
     setContent(event.target.value);
@@ -126,18 +137,13 @@ function NewsFeed() {
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className={styles.navContainer}>
-                  <Nav.Link as={Link} to="/" className="text-decoration-none">
+                  <Nav.Link as={Link} to="/MyProfile" className="text-decoration-none">
                     <li className={`list-group-item fs-5 py-3 shadow ${styles.textcolor}`}>
-                      <RiNewspaperLine /> Newsfeed
-                    </li>
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="myprofile" className="text-decoration-none">
-                    <li className={`list-group-item fs-5 py-3 shadow ${styles.textcolor}`}>
-                      <RiFolderUserLine /> My Posts
+                      <RiFolderUserLine /> My Profile
                     </li>
                   </Nav.Link>
                   <Nav.Link as={Link} to="signout" className="text-decoration-none">
-                    <li className={`list-group-item fs-5 py-3 shadow ${styles.signOutButton} ${styles.textcolor}`}>
+                    <li className={`list-group-item fs-5 py-3 shadow ${styles.signOutButton} ${styles.textcolor}`} onClick={handleSignOut}>
                       <RiLogoutBoxLine /> Sign Out
                     </li>
                   </Nav.Link>

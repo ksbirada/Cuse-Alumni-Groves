@@ -48,6 +48,21 @@ public class UserService implements UserDetailsService{
         }
     }
 
+    public ResponseObject findById(String id) {
+        ResponseObject responseObj = new ResponseObject();
+        Optional<UserModel> optUser = userRepo.findById(id);
+        if (optUser.isEmpty()) {
+            responseObj.setStatus("fail");
+            responseObj.setMessage("user id: " + id + " not existed");
+            responseObj.setPayload(null);
+            return responseObj;
+        } else {
+            responseObj.setPayload(optUser.get());
+            responseObj.setStatus("success");
+            responseObj.setMessage("success");
+            return responseObj;
+        }
+    }
     public boolean addUser(UserModel inputUser) {
         Optional<UserModel> optUser = userRepo.findById(inputUser.getId());
         if (optUser.isEmpty()) {
