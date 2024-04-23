@@ -1,5 +1,6 @@
 package com.alumni.groves.backend.controller;
 
+import com.alumni.groves.backend.models.LikeModel;
 import com.alumni.groves.backend.models.PostModel;
 import com.alumni.groves.backend.models.ResponseObject;
 import com.alumni.groves.backend.service.PostService;
@@ -28,5 +29,10 @@ public class PostController {
     @GetMapping("/getpost/{userId}")
     public ResponseEntity<ResponseObject> getPostById(@PathVariable String userId){
         return new ResponseEntity<>(postService.getAllPosts(userId), HttpStatus.OK);
+    }
+
+    @PostMapping("/likepost")
+    public ResponseEntity<ResponseObject> lovePost(@RequestBody LikeModel doubleId) {
+        return new ResponseEntity<ResponseObject>(postService.updatePostByLike(doubleId), HttpStatus.OK);
     }
 }
