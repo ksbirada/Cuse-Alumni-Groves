@@ -35,5 +35,7 @@ public class PostModel {
 
     private List<CommentStructureModel> comment;
 
+    private List<CommentModel> commentModel;
+
     private Instant createdAt;
 }
