@@ -1,10 +1,11 @@
 // MyProfile.js
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import styles from "./styles/MyProfile.module.css";
-import PostItem from "./PostItem";
+
 
 function MyProfile() {
   const navigate = useNavigate();
@@ -12,8 +13,8 @@ function MyProfile() {
   const [postData, setPostData] = useState([])
 
   useEffect(() => {
-    
-    const userId = "kkaulakh@syr.edu";
+
+    const userId = "gkosti@syr.edu";
 
     // Fetch user data and posts from the database based on userId
     const fetchUserData = async () => {
@@ -51,38 +52,29 @@ function MyProfile() {
   }, []);
 
   return (
-    <Container className="pt-3">
-      <Row>
-        <Col md={4}>
-          <div className={styles.profileSection}>
-            <h2>Profile Information</h2>
-            <p><strong>Name:</strong> {userInfo.firstName} {userInfo.lastName}</p>
-            <p><strong>Email:</strong> {userInfo.email}</p>
-            <p><strong>Role:</strong> {userInfo.userType}</p>
-            <Button variant="primary" onClick={() => navigate("/editprofile")}>Edit Profile</Button>
-          </div>
-        </Col>
-        <Col md={8}>
-          <h2>My Posts</h2>
-          {postData.map((post, index) => (
-            <PostItem
-              key={post.id}
-              postId={post.id}
-              userId={post.userId}
-              firstName={post.firstName || ''}
-              lastName={post.lastName || ''}
-              title={post.title}
-              content={post.content}
-              image1={post.image1}
-              image2={post.image2}
-              likeCount={post.likeCount}
-              commentList={post.comment || []}
-              createdAt={post.createdAt}
-            />
-          ))}
-        </Col>
-      </Row>
-    </Container>
+      <Container className="pt-3">
+        <Row>
+          <Col md={4}>
+            <div className={styles.profileSection}>
+              <h2>Profile Information</h2>
+              <p><strong>Name:</strong> {userInfo.firstName} {userInfo.lastName}</p>
+              <p><strong>Email:</strong> {userInfo.email}</p>
+              <p><strong>Role:</strong> {userInfo.role}</p>
+              <p><strong>Joining Year:</strong> {userInfo.joiningYear}</p>
+              <Button variant="primary" onClick={() => navigate("/editprofile")}>Edit Profile</Button>
+            </div>
+          </Col>
+          <Col md={8}>
+            <h2>My Posts</h2>
+            {postData.map((post) => (
+                <div key={post.id} className={styles.postItem}>
+                  <h3>{post.title}</h3>
+                  <p>{post.content}</p>
+                </div>
+            ))}
+          </Col>
+        </Row>
+      </Container>
   );
 }
 
