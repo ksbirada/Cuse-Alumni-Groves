@@ -1,42 +1,105 @@
-.profileSection {
-  width: 80%;
-  margin: auto;
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa; /* Light gray background */
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  text-align: center;
+  background-color: #fff; /* White container background */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.postItem {
-  margin-bottom: 15px;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+/* Profile styles */
+.profile-header {
+  background-color: #f26522; /* Orange background for header */
+  color: #fff; /* White text color */
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.profileSection h2,
-.postItem h3 {
-  color: #333;
+.profile-header h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
-.profileSection p,
-.postItem p {
-  color: #666;
+.profile-header p {
+  font-size: 16px;
+  margin-bottom: 5px;
 }
 
-.profileSection button {
-  margin-top: 10px;
-  background-color: #007bff;
-  color: #fff;
+.profile-header button {
+  background-color: #f8f9fa; /* Light gray button background */
+  color: #f26522; /* Orange button text color */
   border: none;
   padding: 8px 16px;
-  border-radius: 5px;
+  font-size: 16px;
+  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.profileSection button:hover {
-  background-color: #0056b3;
+.profile-header button:hover {
+  background-color: #e0e0e0; /* Darker gray on hover */
+}
+
+.post-item {
+  background-color: #fff; /* White background for posts */
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-item h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.post-item p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.post-item img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.post-item button {
+  background-color: #dc3545; /* Red button for delete */
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.post-item button:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+/* Media query for responsiveness */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .profile-header h1 {
+    font-size: 20px;
+  }
+
+  .post-item h2 {
+    font-size: 16px;
+  }
 }

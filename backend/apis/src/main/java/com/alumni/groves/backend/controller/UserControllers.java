@@ -9,7 +9,7 @@ import com.alumni.groves.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
+//import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +36,7 @@ public class UserControllers {
 
     @GetMapping("/get/{userId}")
     public ResponseEntity<ResponseObject> getUserDetailsById(@PathVariable String userId) {
-        return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
+        return new ResponseEntity<>(userService.findById(userId), HttpStatus.OK);
     }
 
         @PostMapping("/users/signin")
