@@ -30,9 +30,6 @@ public class UserControllers {
     @Autowired
     private UserService userService;
 
-  @Autowired
-    private AuthenticationManager authenticationManager;
-
     @Autowired
     private UserRepository userRepo;
 
@@ -49,18 +46,28 @@ public class UserControllers {
 
     @PostMapping("/users/signin")
     public ResponseEntity<ResponseObject> userSignIn(@RequestBody UserSignInModel inputUser) {
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(inputUser.getEmail(), inputUser.getPassword()));
-            String token = "token";
-
-            Optional<UserModel> optUser = userRepo.findByEmail(inputUser.getEmail());
+    try {
+        
+        Optional<UserModel> optUser = userRepo.findByEmail(inputUser.getEmail());
+        System.out.println(optUser.toString()+" userValue");
+        if (optUser.isPresent()) {
             UserModel user = optUser.get();
-            user.setPassword("");
-            return new ResponseEntity<ResponseObject>(new ResponseObject("success", "authenticated", new AuthorizedModel(user, token)), HttpStatus.OK);
-        } catch (Exception ex) {
-            return new ResponseEntity<ResponseObject>(new ResponseObject("fail", "unauthenticated", null), HttpStatus.OK);
+
+            if(user.getPassword().equals(inputUser.getPassword())){
+                return new ResponseEntity<>(new ResponseObject("success", "authenticated", null), HttpStatus.OK);
+            }else{
+                return new ResponseEntity<ResponseObject>(new ResponseObject("fail", "unauthenticated", null), HttpStatus.OK);
+            }
+
+           
+        } else {
+           return new ResponseEntity<>(new ResponseObject("fail", "user not found", null), HttpStatus.NOT_FOUND);
         }
+    } catch (Exception ex) {
+        System.out.println("Exception occurred during sign in: " + ex.getMessage());
+        return new ResponseEntity<>(new ResponseObject("fail", "internal server error", null), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+}
 
     @PostMapping("/users/update")
     public ResponseEntity<ResponseObject> updateUserProfile(@RequestBody UserEditProfileModel userEditProfileModel) {

@@ -9,6 +9,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -39,5 +42,24 @@ public class PostService {
         responseObj.setMessage("success");
         responseObj.setPayload(repo.findAllByUserId(email));
         return responseObj;
+    }
+
+
+    public ResponseObject updatePostByComment(PostModel inputPost) {
+        ResponseObject responseObj = new ResponseObject();
+        Optional<PostModel> optPost = repo.findById(inputPost.getId());
+        if (optPost.isEmpty()) {
+            responseObj.setStatus("fail");
+            responseObj.setMessage("cannot find post id: " + inputPost.getId());
+            responseObj.setPayload(null);
+            return responseObj;
+        } else {
+            // inputPost.setCreatedAt(Instant.now());
+            repo.save(inputPost);
+            responseObj.setStatus("success");
+            responseObj.setMessage("post is updated successfully");
+            responseObj.setPayload(inputPost);
+            return responseObj;
+        }
     }
 }
