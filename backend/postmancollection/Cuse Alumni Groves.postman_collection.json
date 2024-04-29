@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "83c7a75d-4c13-45b7-af1a-57a3cf2ee97b",
+		"_postman_id": "0447f2b3-6836-4a3b-a52f-03945e62fa99",
 		"name": "Cuse Alumni Groves",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13759710"
@@ -35,6 +35,113 @@
 						"v1",
 						"users",
 						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Post",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"123\",\n    \"firstName\": \"Kamaljit\",\n    \"lastName\": \"Aulakh\",\n    \"title\": \"POST 2\",\n    \"content\": \"This is my first post 1\",\n    \"image1\": \"2w34sefdrftyguhijoklpxdcfvgbhnjmkerft\",\n    \"image2\": \"2w34sefdrftyguhijoklpxdcfvgbhnjmkerft\",\n    \"likeCount\": \"4\",\n    \"comment\": [\n        {\n            \"username\": \"user1\",\n            \"comment\": \"This is comment from user 1\"\n        },\n        {\n            \"username\": \"user2\",\n            \"comment\": \"This is comment from user 2\"\n        },\n        {\n            \"username\": \"user3\",\n            \"comment\": \"This is comment from user 3\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/insertpost",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"insertpost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Post",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/getpost",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"getpost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Post By ID",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/getpost/kkaulakh@syr.edu",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"getpost",
+						"kkaulakh@syr.edu"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User By ID",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/get/kkaulakh@syr.edu",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"get",
+						"kkaulakh@syr.edu"
 					]
 				}
 			},
