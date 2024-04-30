@@ -133,6 +133,15 @@ public class UserService implements UserDetailsService{
         responseObj.setPayload(user);
         return responseObj;
     }
+
+
+    public ResponseObject findAll() {
+        ResponseObject responseObj = new ResponseObject();
+        responseObj.setPayload(userRepo.findAll());
+        responseObj.setStatus("success");
+        responseObj.setMessage("success");
+        return responseObj;
+    }
 }
 
 
