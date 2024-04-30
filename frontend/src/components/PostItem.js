@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect } from "react";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
+import axios from "axios";
 
 import {
   RiHeartFill,
@@ -14,19 +15,52 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 
 function PostItem(props) {
     //const dispatch = useDispatch();
-  
-    const [loveStatus, setLoveStatus] = useState(false);
+    const [refreshComponent, setRefreshComponent] = useState(false);
+    
     const [commentStatus, setCommentStatus] = useState(false);
     const [commentContent, setCommentContent] = useState("");
     const [sendButtonDisable, setSendButtonDisable] = useState(true);
     const [postId, setPostId] = useState(props.postId);
+    const [commentList, setCommentList] = useState(props.commentList);
+    const [currentUserId, setCurrentUserId] = useState(
+      localStorage.getItem("userId")
+    ); 
+    const [likeStatus, setLikeStatus] = useState(false);
+
+    useEffect(() => {
+      if (props.like.includes(currentUserId)) {
+        setLikeStatus(true);
+      }
+    }, []);
   
     TimeAgo.addLocale(en);
     const timeAgo = new TimeAgo("en-US");
+
   
-    function handleLoveClick(e) {
-      console.log("Do nothing for now");
+    function handleLikeClick(e) {
+      const userId=localStorage.getItem("userId");
+      console.log(props)
+      console.log(currentUserId)
+      if (!props.like.includes(currentUserId)) {
+        setLikeStatus(true);    
+      } else {
+        setLikeStatus(false);
+      }
+      updateLike(postId, userId);
     }
+
+    async function updateLike(postId, userId) {
+      const response = await axios({
+          method: "post",
+          url: "http://localhost:8080/api/v1/likepost",
+          data: {
+              id1: postId,
+              id2: userId
+          }
+      });
+      
+      return response.data;
+  }
   
     function handleShareClick(e) {
       //dispatch(addShare({ postId: postId, userId: currentUserId }));
@@ -49,21 +83,36 @@ function PostItem(props) {
       }
     }
   
-    function sendComment(e) {
-    //   dispatch(
-    //     addComment({
-    //       postId: postId,
-    //       newComment: {
-    //         userId: localStorage.getItem("psnUserId"),
-    //         userFullname:
-    //           localStorage.getItem("psnUserFirstName") +
-    //           " " +
-    //           localStorage.getItem("psnUserLastName"),
-    //         content: commentContent,
-    //       },
-    //     })
-    //   );
+    async function sendComment(e) {
+    try {
+    const response = await axios({
+      method: "post",
+      url: "http://localhost:8080/api/v1/insertcomment",
+      data: {
+        commentModel: {
+          userId: localStorage.getItem("userId"),
+          userFullname: localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"),
+          content: commentContent, 
+        },
+        postId: {
+          id: postId,
+        },
+      },
+    });
+    if (response.status >= 200 && response.status < 300) {
+      const newComment = {
+        username: localStorage.getItem("firstName") + " " + localStorage.getItem("lastName"),
+        comment: commentContent,
+      };
       setCommentContent("");
+      setRefreshComponent(prevState => !prevState);
+
+      // Update the comment list by adding the new comment
+      setCommentList(commentList => [...commentList, newComment]);
+    }
+  } catch (error) {
+    console.error("Error adding comment:", error);
+  }
     }
   
     return (
@@ -101,20 +150,20 @@ function PostItem(props) {
           {/* Sub-functions of a post */}
   
           <div className="d-flex justify-content-center align-items-center">
-            {/* Sub-function love button */}
+            {/* Sub-function like button */}
             <div className="mx-3">
               <span
                 className={`mx-1 fs-4`}
-                onClick={handleLoveClick}
+                onClick={handleLikeClick}
               >
-                {loveStatus ? (
+                {likeStatus ? (
                   <RiHeartFill className="text-danger" />
                 ) : (
                   <RiHeartLine className="text-danger" />
                 )}
               </span>
               <span>
-                {props.loveList > 0 ? props.loveList : null}
+                {props.like && props.like > 0 ? props.like : null}
               </span>
             </div>
   
@@ -127,7 +176,7 @@ function PostItem(props) {
                 <RiMessage2Fill className="text-primary" />
               </span>
               <span>
-                {props.commentList.length > 0 ? props.commentList.length : null}
+                {commentList.length > 0 ? commentList.length : null}
               </span>
             </div>
           </div>
@@ -158,7 +207,7 @@ function PostItem(props) {
                   </Button>
                 </div>
               </div>
-              {props.commentList.map((commentItem) => (
+              {commentList.map((commentItem) => (
                 <div className="border rounded border-info my-3 px-2 pb-2">
                   <div className="d-flex align-items-center my-2">
                     <div className="w-100 mx-1 fw-bold">

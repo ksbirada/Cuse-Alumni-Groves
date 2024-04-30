@@ -1,7 +1,6 @@
 package com.alumni.groves.backend.models;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -34,7 +33,7 @@ public class PostModel {
 
     private int likeCount;
 
-    List<String> like = new ArrayList<>();
+    private List<String> like;
 
     private List<CommentStructureModel> comment;
 
