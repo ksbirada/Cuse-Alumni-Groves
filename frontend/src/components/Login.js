@@ -17,6 +17,7 @@ import Container from "react-bootstrap/esm/Container";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import logo from './assets/ca.jpeg';
 
 function Login() {
   const [resData, setResData] = useState(null);
@@ -95,13 +96,24 @@ function Login() {
           isInValid,
           errors,
         }) => (
+
           <Form
             noValidate
             onSubmit={handleSubmit}
             className={styles.formContainer} 
           >
+
+            <Row className="mb-3 justify-content-center text-center">
+                <Col md="auto" className="mb-sm-0 mb-3">
+                  <img src={logo} width="300" alt="Cuse Alumni Groves logo" />
+                </Col>
+              </Row>
+
             <Row className="mb-2 text-center">
-              <h1 className="heading">Welcome to <span className={styles.inlinetext}>Cuse Alumni Groves</span></h1>
+
+              <Col>
+                <h1 className="heading">Welcome to <span className={styles.inlinetext}>Cuse Alumni Groves</span></h1>
+              </Col>
             </Row>
             <Row className="mb-3">
               <Form.Group as={Col} md="12" controlId="loginEmail"> 

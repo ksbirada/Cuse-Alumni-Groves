@@ -121,15 +121,17 @@ function NewsFeed() {
               <img src={logo} width="125" alt="Cuse Alumni Groves logo" />
             </Col>
             <Col className="text-sm-start text-center">
-              <h3>Cuse Alumni Groves</h3>
+            <h2 className="heading">Cuse Alumni <span className={styles.inlinetext}>Groves</span></h2>
             </Col>
           </Row>
         </Col>
         <Col md={6} className={styles.searchBar}>
         <div className="d-flex justify-content-center align-items-center w-100 h-100">
+        <div className="text-end">
             <Button variant="success" onClick={handleSearch}>
-              Find All User Accounts
+              All User Accounts
             </Button>
+            </div>
           </div>
         </Col>
       </Row>
