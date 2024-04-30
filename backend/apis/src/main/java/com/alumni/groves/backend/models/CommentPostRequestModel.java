@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentPostRequestModel {
-    private CommentModel CommentData;
+    private CommentModel commentModel;
     private IdObjectModel postId;
 }
