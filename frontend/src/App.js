@@ -5,6 +5,7 @@ import NewsFeed from './components/NewsFeed';
 import Login from './components/Login';
 import MyProfile from './components/MyProfile';
 import EditProfile from './components/EditProfile';
+import AllAccounts from './components/AllAccounts';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/newsfeed" element={<NewsFeed />} />
           <Route path="/MyProfile" element={<MyProfile />} />
           <Route path="/EditProfile" element={<EditProfile />} />
+          <Route path="/newsfeed/allaccounts" element={<AllAccounts />} />
       </Routes>
     </BrowserRouter>
   );
