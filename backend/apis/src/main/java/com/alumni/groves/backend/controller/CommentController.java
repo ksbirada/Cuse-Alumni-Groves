@@ -22,11 +22,9 @@ public class CommentController {
 
     @PostMapping("/insertcomment")
     public ResponseEntity<ResponseObject> insertComment(@RequestBody CommentPostRequestModel postedComment) {
-        CommentModel inputComment = postedComment.getCommentData();
+        CommentModel inputComment = postedComment.getCommentModel();
         IdObjectModel inputPostId = postedComment.getPostId();
         return new ResponseEntity<ResponseObject>(commentService.insertComment(inputComment, inputPostId.getId()), HttpStatus.OK);
     }
-
-    //getComments
 
 }
