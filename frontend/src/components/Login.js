@@ -19,47 +19,44 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [selectedUserRole, setSelectedUserRole] = useState("user");
-  const [responseData, setResponseData] = useState(null);
-  
+  const [resData, setResData] = useState(null);
+
   let navigate = useNavigate();
 
   const schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().required(),
-    firstName: yup.string().required(),
-    lastName: yup.string().required(),
   });
 
-  async function postSignUpInfo(formData) {
-    navigate("/newsfeed");
+  async function postSignInInfo(inputData) {
     const response = await axios({
       method: "post",
-      url: "/api/v1/users/save",
+      url: "http://localhost:8080/api/v1/users/signin",
       data: {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        password: formData.password,
-        role: selectedUserRole,
+        email: inputData.email,
+        password: inputData.password,
       },
     });
-
-    if (response.data !== null) {
-      setResponseData(response.data);
-    }
     
     if (response.data !== null && response.data.status === "fail") {
-      showWarningToast(response.data.message);      
+      showWarningToast(response.data.message);
     }
-
-    if (response.data!== null && response.data.status === "success") {
+    
+    if (response.data !== null && response.data.status === "success") {
+      setResData(response.data);
+      console.log(response)
+      
+      localStorage.setItem("userId", response.data.payload.id);
+      localStorage.setItem("firstName", response.data.payload.firstName);
+      localStorage.setItem("lastName", response.data.payload.lastName);
+      localStorage.setItem("email", response.data.payload.email);
       navigate("/newsfeed");
     }
+
   }
 
-  function showWarningToast(message) {
-    toast.warn(message, { 
+  function showWarningToast(inputMessage) {
+    toast.warn("Invalid email or password", {
       position: "bottom-center",
       autoClose: 3000,
       hideProgressBar: false,
@@ -69,7 +66,9 @@ function Login() {
       progress: undefined,
       theme: "colored",
     });
+    console.log("toast");
   }
+
 
   return (
     <Container fluid className={styles.container}> 
@@ -83,7 +82,7 @@ function Login() {
           lastName: "",
         }}
         onSubmit={(values, { setSubmitting }) => {
-          postSignUpInfo(values);
+          postSignInInfo(values);
           setSubmitting(false);
         }}
       >

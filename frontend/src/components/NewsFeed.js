@@ -55,6 +55,10 @@ function NewsFeed() {
     setTitle(event.target.value);
   };
 
+  function handleSearch(e) {
+    navigate("/newsfeed/allaccounts");
+  }
+
   function handleSignOut(e) {
     e.preventDefault();
     console.log(localStorage);
@@ -63,6 +67,7 @@ function NewsFeed() {
     localStorage.removeItem("lastName");
     navigate("/login");
   }
+
 
   const handleContentChange = (event) => {
     setContent(event.target.value);
@@ -121,13 +126,11 @@ function NewsFeed() {
           </Row>
         </Col>
         <Col md={6} className={styles.searchBar}>
-          <form className="w-100">
-            <input 
-              type="search" 
-              className="form-control" 
-              placeholder="Search user accounts..." 
-            />
-          </form>
+        <div className="d-flex justify-content-center align-items-center w-100 h-100">
+            <Button variant="success" onClick={handleSearch}>
+              Find All User Accounts
+            </Button>
+          </div>
         </Col>
       </Row>
       <Row>
@@ -219,6 +222,7 @@ function NewsFeed() {
                   image1={post.image1}
                   image2={post.image2}
                   likeCount={post.likeCount}
+                  like={post.like}
                   commentList={post.comment || []}
                   createdAt={post.createdAt}
                 />

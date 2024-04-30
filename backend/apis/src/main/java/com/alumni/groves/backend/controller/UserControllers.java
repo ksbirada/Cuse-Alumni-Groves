@@ -53,8 +53,9 @@ public class UserControllers {
         if (optUser.isPresent()) {
             UserModel user = optUser.get();
 
-            if(user.getPassword().equals(inputUser.getPassword())){
-                return new ResponseEntity<>(new ResponseObject("success", "authenticated", null), HttpStatus.OK);
+            if(passwordEncoder.matches(inputUser.getPassword(), user.getPassword())){
+                user.setPassword("");
+                return new ResponseEntity<>(new ResponseObject("success", "authenticated", user), HttpStatus.OK);
             }else{
                 return new ResponseEntity<ResponseObject>(new ResponseObject("fail", "unauthenticated", null), HttpStatus.OK);
             }
@@ -90,6 +91,12 @@ public class UserControllers {
             }
         }
         return new ResponseEntity<>(new ResponseObject("Failure", "failure", "No case matched data not updated"), HttpStatus.OK);
+    }
+
+
+    @PostMapping("/users")
+    public ResponseEntity<ResponseObject> findAllUsers() {
+        return new ResponseEntity<ResponseObject>(userService.findAll(), HttpStatus.OK);
     }
 
 }

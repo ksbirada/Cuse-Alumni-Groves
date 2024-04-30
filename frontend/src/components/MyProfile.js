@@ -14,7 +14,7 @@ function MyProfile() {
 
   useEffect(() => {
 
-    const userId = "gkosti@syr.edu";
+    const userId = localStorage.getItem("userId");
 
     // Fetch user data and posts from the database based on userId
     const fetchUserData = async () => {
@@ -59,8 +59,8 @@ function MyProfile() {
               <h2>Profile Information</h2>
               <p><strong>Name:</strong> {userInfo.firstName} {userInfo.lastName}</p>
               <p><strong>Email:</strong> {userInfo.email}</p>
-              <p><strong>Role:</strong> {userInfo.role}</p>
-              <p><strong>Joining Year:</strong> {userInfo.joiningYear}</p>
+              <p><strong>Role:</strong> {userInfo.userType}</p>
+              <p><strong>Graduation Year:</strong> {userInfo.joiningYear}</p>
               <Button variant="primary" onClick={() => navigate("/editprofile")}>Edit Profile</Button>
             </div>
           </Col>
